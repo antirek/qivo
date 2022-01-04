@@ -1,0 +1,14 @@
+extends ../../layout.pug
+
+block content
+
+  form.d-flex.justify-content-center(
+    ref='uploadForm' 
+    id='uploadForm'
+    action="/accounts/" + accountId + "/users/" + userId + "/upload"
+    method="POST" 
+    encType="multipart/form-data"
+  )
+    div.row
+      input(name="avatar" type="file")
+      button.btn.btn-primary.mt-3 submit

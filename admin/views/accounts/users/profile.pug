@@ -1,0 +1,25 @@
+extends ../../layout.pug
+
+block content
+
+  div.card.my-5.mx-auto(style="width: 36rem;")
+    div.card
+      h5.text-center.my-2= user.name
+      div.card-body.row
+        img.card-img(
+          width='400px' 
+          src="/accounts/" + user.accountId + "/users/" + user.userId + '/avatar'
+        )
+        div.d-flex.container.justify-content-end
+          a.btn.btn-dark.my-3(href="upload/") Upload
+        div.d-flex.container.row.justify-content-center
+            div.row.col-7.justify-content-center
+                div.col-6.text-center
+                  p.mt-3 email
+                div.col-6.text-center
+                  p.card-text.mt-3= user.email
+            div.row.col-7.justify-content-center.text-center
+                div.col-6
+                  p.mt-3 phone
+                div.col-6.text-center
+                  p.card-text.mt-3= user.phone

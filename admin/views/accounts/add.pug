@@ -1,0 +1,17 @@
+extends ../layout.pug
+
+block content
+  
+  div.justify-content-center.h-75.align-items-center.d-flex
+    div.text-center
+      h5 Add account
+      form(action="/accounts/add" method="POST") 
+        div.d-flex
+          div.row
+            div.col-9
+              input.form-control.mt-3(
+                type="text" name="title" 
+                placeholder="Account title"
+              )
+            div.col-3
+              button.btn.btn-dark.mt-3 submit

@@ -1,0 +1,10 @@
+extends ../layout.pug
+
+block content
+
+  form.d-flex.justify-content-center(action="/auth/login/" method="POST")
+    div.form-group.text-center
+        p.h4.mt-5 Login
+        input.form-control.mt-3(type="text" name="phone" placeholder="phone")
+        input.form-control.mt-3(type="text" name="password" placeholder="password")
+        button.btn.btn-dark.mt-4 submit

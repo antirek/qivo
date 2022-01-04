@@ -1,0 +1,11 @@
+extends ../../layout.pug
+
+block content
+
+  form.d-flex.justify-content-center(action="/accounts/" + accountId + "/add" method="POST")
+    div.form-group.text-center
+        p.h4.mt-5 Add user
+        input.form-control.mt-3(type="text" name="name" placeholder="name")
+        input.form-control.mt-3(type="text" name="email" placeholder="email")
+        input.form-control.mt-3(type="text" name="phone" placeholder="phone")
+        button.btn.btn-dark.mt-4 submit

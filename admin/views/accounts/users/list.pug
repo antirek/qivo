@@ -1,0 +1,46 @@
+extends ../../layout.pug
+
+block content
+  p.h4.text-center.mt-5= account.title
+  
+  ul.nav.nav-tabs
+    li.nav-item
+      a.nav-link.active(href="#1" data-toggle="tab") Users
+
+  div.tab-content
+    div.tab-pane.active(id="1")
+
+      a.btn.btn-dark.col-1.my-4(href="/accounts/" + account.accountId + "/add") Add
+      
+      script.
+        $(document).ready(function() {
+          $('#accounts_users_table').DataTable( {
+              "processing": true,
+              "serverSide": 0,
+              "ajax": "/accounts/" + #{account.accountId} + "/users/json",
+              aoColumns: [
+                { mData: 'userId'},
+                { mData: 'name'},
+                { mData: 'email'},
+                { mData: 'phone'},
+                { mData: 'dateCreated' },
+                { mData: 'userId' , render : function ( data, type, row, meta ) {
+                    return '<div class="col text-center">'+
+                          '<a class="btn btn-dark mx-2" href="/accounts/' + #{account.accountId} + 
+                          '/password/' + data + '">Password</a>' +
+                          '<a class="btn btn-dark" href="users/' + data + '/">Profile</a>'+
+                          '</div>'
+                }}
+              ]
+            });
+        })
+
+      table(id="accounts_users_table" class="display" width="100%")
+        thead
+          tr 
+            th.text-center User Id
+            th.text-center Name 
+            th.text-center Mail 
+            th.text-center Phone            
+            th.text-center Date created 
+            th.text-center Actions
