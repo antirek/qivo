@@ -15,7 +15,7 @@ const createVideoRouter = () => {
 
   videoRouter.use(fileUpload());
   videoRouter.get('/upload', async (req, res) => {
-    res.render('video/upload');
+    res.render('video/upload', {user: req.user});
   });
 
   videoRouter.post('/upload', async (req, res) => {

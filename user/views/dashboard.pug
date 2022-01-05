@@ -1,17 +1,9 @@
 extends layout.pug
 
 block content
-  block content
-
-  p.h4.text-center.mt-5= user.name 
-
   div.my-4.d-flex.justify-content-between
     a.btn.btn-dark(href="/video/upload/") New video
-    a.btn.btn-dark(href="/auth/logout") logout
 
-  table.table 
-    each video in videos
-      tr
-        td= video.videoId
-        td= video.title
-        td= video.dateCreated
+  each video in videos
+    h3= video.title
+    video(src="/video/" + video.videoId width="500" height="300" controls preload="none")

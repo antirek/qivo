@@ -7,7 +7,7 @@ const createRootRouter = () => {
 
   rootRouter.get('/', async (req, res) => {
     const accountId = req.user.accountId;
-    const videos = await Video.find({accountId});
+    const videos = await Video.find({accountId}).sort({dateCreated: -1});
     
     res.render('dashboard', {
       user: req.user,
