@@ -7,4 +7,5 @@ module.exports = {
   },
   mongodb: "mongodb://mongodb:27017/test",
   uploadPath: '/tmp',
+  uploadPathVideos: '/tmp/videos',
 };

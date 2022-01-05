@@ -1,12 +1,20 @@
 const express = require('express');
 
-const createRootRouter = ({sessions}) => {
-    const rootRouter = express.Router();
+const { Video } = require('./../../admin/models');
 
-    rootRouter.get('/', (req, res) => {
-        res.render('user', {user: req.user});
+const createRootRouter = () => {
+  const rootRouter = express.Router();
+
+  rootRouter.get('/', async (req, res) => {
+    const accountId = req.user.accountId;
+    const videos = await Video.find({accountId});
+    
+    res.render('dashboard', {
+      user: req.user,
+      videos,
     });
-    return rootRouter;
+  });
+  return rootRouter;
 }
 
 module.exports = {createRootRouter};
