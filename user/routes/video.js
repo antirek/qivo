@@ -13,10 +13,14 @@ const uploadPathVideos = config.uploadPathVideos;
 const createVideoRouter = () => {
   const videoRouter = express.Router();
 
-  videoRouter.use(fileUpload());
+  videoRouter.use(fileUpload({
+    limits: {
+      fileSize: 200 * 1024 * 1024,
+    },
+  }));
   videoRouter.get('/upload', async (req, res) => {
     res.render('video/upload', {user: req.user});
-  });
+  });       
 
   videoRouter.post('/upload', async (req, res) => {
     console.log('post video', req.files, req.body, req.user);
@@ -47,7 +51,7 @@ const createVideoRouter = () => {
     res.redirect('/');
   });
 
-  videoRouter.get('/file/:videoId', async (req, res) => {
+  videoRouter.get('/media/:videoId', async (req, res) => {
     const {videoId} = req.params;
     const video = await Video.findOne({videoId});
     if (!video) {

@@ -6,7 +6,7 @@ block content
 
   each video in videos
     h3= video.title
-    video(src="/video/" + video.videoId width="500" height="300" controls preload="none" volume="1")
+    video(src="/video/media/" + video.videoId width="500" height="300" controls preload="none" volume="1")
     a.btn.btn-light(onclick='getShareLink("' + video.videoId + '")') Share 
     #shareLink
 
