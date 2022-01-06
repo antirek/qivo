@@ -28,6 +28,7 @@ const VideoSchema = new mongoose.Schema({
   accountId: String,
   extension: String,
   mimetype: String,
+  secret: String,
 });
 
 const User = mongoose.model('User', UserSchema);

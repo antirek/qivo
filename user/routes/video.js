@@ -47,7 +47,7 @@ const createVideoRouter = () => {
     res.redirect('/');
   });
 
-  videoRouter.get('/:videoId', async (req, res) => {
+  videoRouter.get('/file/:videoId', async (req, res) => {
     const {videoId} = req.params;
     const video = await Video.findOne({videoId});
     if (!video) {
@@ -57,6 +57,26 @@ const createVideoRouter = () => {
     const videoPath = path.join(uploadPathVideos, video.userId, videoFilename);
 
     res.sendFile(videoPath);
+  });
+
+  videoRouter.get('/shareLink/:videoId', async (req, res) => {
+    const {videoId} = req.params;
+    const video = await Video.findOne({videoId});
+    if (!video) {
+      return res.status(404).json({status: 'Not Found'});
+    }
+    
+    if (!video.secret) {
+      const secret = nanoid();
+      video.secret = secret;
+      await video.save();
+    }
+
+    const server = 'http://localhost:3000';
+    res.json({
+      shareLinkMedia: `${server}/share/media/${video.videoId}/${video.secret}`,
+      shareLinkPage: `${server}/share/page/${video.videoId}/${video.secret}`,
+    });
   });
 
   return videoRouter;

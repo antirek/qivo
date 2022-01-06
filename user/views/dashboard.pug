@@ -6,4 +6,14 @@ block content
 
   each video in videos
     h3= video.title
-    video(src="/video/" + video.videoId width="500" height="300" controls preload="none")
+    video(src="/video/" + video.videoId width="500" height="300" controls preload="none" volume="1")
+    a.btn.btn-light(onclick='getShareLink("' + video.videoId + '")') Share 
+    #shareLink
+
+  script.
+    async function getShareLink(videoId) {
+      const res = await fetch('/video/shareLink/' + videoId);
+      const data = await res.json();
+      console.log('res', data);
+      $('#shareLink').html(data.shareLinkMedia);
+    }

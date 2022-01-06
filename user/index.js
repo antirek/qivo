@@ -7,6 +7,7 @@ const config = require('config');
 const {createAuthRouter} = require('./routes/auth');
 const {createRootRouter} = require('./routes/root');
 const {createVideoRouter} = require('./routes/video');
+const {createShareRouter} = require('./routes/share');
 
 const app = express();
 let sessions = {};
@@ -14,6 +15,7 @@ let sessions = {};
 const authRouter = createAuthRouter();
 const rootRouter = createRootRouter();
 const videoRouter = createVideoRouter();
+const shareRouter = createShareRouter();
 
 mongoose.connect(config.mongodb);
 app.use(express.urlencoded({extended: true}));
@@ -49,6 +51,7 @@ const auth = (req, res, next) => {
 }
 
 app.use('/auth', authRouter);
+app.use('/share', shareRouter);
 app.use('/video', auth, videoRouter);
 app.use('/', auth, rootRouter);
 
