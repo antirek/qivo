@@ -21,6 +21,16 @@ const createShareRouter = () => {
     res.sendFile(videoPath);
   });
 
+  shareRouter.get('/page/:videoId/:secret', async (req, res) => {
+    const {videoId, secret} = req.params;
+    const video = await Video.findOne({videoId, secret});
+    if (!video) {
+      return res.status(404).json({status: 'Not Found'});
+    }
+
+    res.render('share/page', {video});
+  });
+
   return shareRouter;
 }
 

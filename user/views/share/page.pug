@@ -1,0 +1,13 @@
+extends ../layout.pug
+
+block content
+
+  h3= video.title
+  video(
+    src="/share/media/" + video.videoId + '/' + video.secret
+    width="500" 
+    height="300" 
+    controls 
+    preload="none" 
+    volume="1"
+  )
